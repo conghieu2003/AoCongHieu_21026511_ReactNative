@@ -1,4 +1,3 @@
-
 let markMass1 = 78; 
 let markHeight1 = 1.69; 
 let johnMass1 = 92; 
