@@ -67,8 +67,6 @@ const App = () => {
           <Text style={{color: 'black', fontSize: 20, fontWeight: 'bold'}}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
-
-
     </View>
   )
 }
