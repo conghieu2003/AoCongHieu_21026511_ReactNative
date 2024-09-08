@@ -27,7 +27,6 @@ const App = () => {
 
       <View style = {{
         flex: 1,
-        // backgroundColor : 'red',
         justifyContent: 'flex-start',
         alignItems: 'center',
         
@@ -42,8 +41,7 @@ const App = () => {
       </View>
 
       <View style = {{
-        flex: 1,
-  
+        flex: 1, 
         justifyContent: 'flex-start',
         alignItems: 'center',
       }}>
