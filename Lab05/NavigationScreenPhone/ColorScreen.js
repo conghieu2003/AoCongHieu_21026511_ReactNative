@@ -7,19 +7,16 @@ const ColorScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.productContainer}>
-        {/* Hình ảnh sản phẩm */}
         <Image 
           source={require('./assets/vs_blue.png')} 
           style={styles.productImage}
         />
-        {/* Thông tin sản phẩm */}
         <View style={styles.productInfo}>
           <Text style={styles.productName}>Điện Thoại Vsmart Joy 3</Text>
           <Text style={styles.productSubtitle}>Hàng chính hãng</Text>
         </View>
       </View>
 
-      {/* Danh sách các màu */}
       <Text style={styles.chooseColorText}>Chọn một màu bên dưới:</Text>
       <View style={styles.colorOptionsContainer}>
         {colors.map((color, index) => (
@@ -31,7 +28,6 @@ const ColorScreen = ({ navigation }) => {
         ))}
       </View>
 
-      {/* Nút XONG */}
       <TouchableOpacity 
         style={styles.confirmButton}
         onPress={() => navigation.goBack()}
