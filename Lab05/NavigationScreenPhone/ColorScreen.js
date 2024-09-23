@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-const colors = ['#ADD8E6', '#FF0000', '#000000', '#0000FF']; 
+const colors = [
+  { color: 'white', image: require('./assets/vs_blue.png') }, 
+  { color: 'red', image: require('./assets/vs_red.png') }, 
+  { color: 'black', image: require('./assets/vs_black.png') }, 
+  { color: 'blue', image: require('./assets/vs_blue.png') }, 
+];
 
-const ColorScreen = ({ navigation }) => {
+const ColorScreen = () => {
+  const [selectedImage, setSelectedImage] = useState(colors[0].image); 
+
+  const handleColorSelection = (image) => {
+    setSelectedImage(image);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.productContainer}>
         <Image 
-          source={require('./assets/vs_blue.png')} 
+          source={selectedImage}
           style={styles.productImage}
-        />
+        /> 
+
         <View style={styles.productInfo}>
           <Text style={styles.productName}>Điện Thoại Vsmart Joy 3</Text>
           <Text style={styles.productSubtitle}>Hàng chính hãng</Text>
@@ -19,18 +31,17 @@ const ColorScreen = ({ navigation }) => {
 
       <Text style={styles.chooseColorText}>Chọn một màu bên dưới:</Text>
       <View style={styles.colorOptionsContainer}>
-        {colors.map((color, index) => (
+        {colors.map((item, index) => (
           <TouchableOpacity 
             key={index} 
-            style={[styles.colorOption, { backgroundColor: color }]}
-            onPress={() => alert(`Chọn màu: ${color}`)}
+            style={[styles.colorOption, { backgroundColor: item.color }]}
+            onPress={() => handleColorSelection(item.image)} 
           />
         ))}
       </View>
-
       <TouchableOpacity 
         style={styles.confirmButton}
-        onPress={() => navigation.goBack()}
+        onPress={() => alert('Màu đã chọn!')}
       >
         <Text style={styles.confirmButtonText}>XONG</Text>
       </TouchableOpacity>
@@ -52,7 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '90%',
     alignItems: 'center', 
-    marginBottom: 20,
+    marginBottom: 20, 
   },
   productImage: {
     width: 100, 
@@ -61,7 +72,7 @@ const styles = StyleSheet.create({
   },
   productInfo: {
     marginLeft: 20, 
-    flex: 1, 
+    flex: 1,
   },
   productName: {
     fontSize: 16,
@@ -87,7 +98,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 5,
-    marginVertical: 10, 
+    marginVertical: 10,
   },
   confirmButton: {
     backgroundColor: '#0000FF',
