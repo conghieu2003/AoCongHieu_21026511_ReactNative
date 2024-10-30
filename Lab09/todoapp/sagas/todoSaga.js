@@ -1,29 +1,23 @@
-// store/todoSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+// sagas/todoSaga.js
+import { call, put, takeEvery } from 'redux-saga/effects';
+import axios from 'axios';
+import { setTodos } from '../store/todoSlice';
 
-const todoSlice = createSlice({
-  name: 'todos',
-  initialState: {
-    list: [],
-  },
-  reducers: {
-    addTodo: (state, action) => {
-      state.list.push({ id: Date.now(), text: action.payload, completed: false });
-    },
-    toggleTodo: (state, action) => {
-      const todo = state.list.find((todo) => todo.id === action.payload);
-      if (todo) {
-        todo.completed = !todo.completed;
-      }
-    },
-    removeTodo: (state, action) => {
-      state.list = state.list.filter((todo) => todo.id !== action.payload);
-    },
-    setTodos: (state, action) => {
-      state.list = action.payload;
-    },
-  },
-});
+function fetchTodosFromAPI() {
+  return axios.get('https://6458c8bc4eb3f674df7d3ce6.mockapi.io/ch/v1/category');
+}
 
-export const { addTodo, toggleTodo, removeTodo, setTodos } = todoSlice.actions;
-export default todoSlice.reducer;
+function* fetchTodosSaga() {
+  try {
+    const response = yield call(fetchTodosFromAPI);
+    yield put(setTodos(response.data)); // response.data đã có dạng JSON đúng như bạn đưa ra
+  } catch (error) {
+    console.error('Error fetching todos:', error);
+  }
+}
+
+function* watchFetchTodos() {
+  yield takeEvery('todos/FETCH_TODOS', fetchTodosSaga);
+}
+
+export default watchFetchTodos;

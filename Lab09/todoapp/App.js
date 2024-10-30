@@ -1,13 +1,14 @@
-// App.js
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
-import TodoApp from './toDoApp';
+import ToDoApp from './toDoApp';
 
-export default function App() {
+const App = () => {
   return (
     <Provider store={store}>
-      <TodoApp />
+      <ToDoApp />
     </Provider>
   );
-}
+};
+
+export default App;
